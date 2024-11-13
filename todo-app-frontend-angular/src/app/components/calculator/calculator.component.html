@@ -1,0 +1,31 @@
+<div class="calculator-container">
+<h3>{{ displayValue}}</h3>
+<br />
+<input type="number" [(ngModel)]="num" placeholder="enter number">
+<button (click)="increment()">+</button>
+<button (click)="decrement()">-</button>
+<button (click)="multiply()">x</button>
+<button (click)="divide()">/</button>
+<button class="calculator-button" (click)="reset()">Reset</button>
+</div>
+
+@if (errorMessage()) {
+  <div class="error">{{ errorMessage() }}</div>
+}
+
+<div class="interest-container">
+  <input type="number" [(ngModel)]="principal" placeholder="Principal">
+  <input type="number" [(ngModel)]="rate" placeholder="Rate">
+  <input type="number" [(ngModel)]="time" placeholder="Time">
+  <button (click)="calculateInterest()">Calculate Interest</button>
+  <p *ngIf="showInterest()">Compound Interest: {{ compoundInterest() }}</p>
+</div>
+
+<div>
+  <p>Count: {{ count() }}</p>
+  <p>Double Count: {{ doubleCount() }}</p>
+  <button (click)="incrementing()">Increment</button>
+</div>
+
+<p>{{hesap}}</p>
+<button (click)="art()">Art</button>

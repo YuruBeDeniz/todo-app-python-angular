@@ -1,0 +1,15 @@
+.completed {
+  text-decoration: line-through;
+}
+
+.task-form {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  padding-bottom: 5px;
+}
+
+.link-button-group {
+  display: flex;
+  gap: 10px;
+}

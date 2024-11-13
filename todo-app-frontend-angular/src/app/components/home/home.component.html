@@ -1,0 +1,15 @@
+<p>Home</p>
+
+<h1>Welcome {{ name }} 👋</h1>
+<h2>Today is {{ today | date }}</h2>
+
+<h3>Counter: {{ initialCount }}</h3>
+<app-counter [parentCountWithSignal]="initialCount" (countChange)="onCountChange($event)"></app-counter>
+
+<!-- 
+<app-counter [(count)]="initialCount" ></app-counter>
+since two way binding is not available like above because 
+i use signal() directly, it should be manually done with
+countChange event listener
+-->
+

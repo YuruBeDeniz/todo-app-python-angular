@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.error {
+    color: red;
+    padding-bottom: 10px;
+    padding-top: 20px;
+}
+
+button {
+  background-color: white;
+  border-radius: 2px;
+  border: 0.5px solid black;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-left: 3px;
+}
+
+button:hover {
+  background-color: rgb(218, 218, 218);
+}

@@ -1,0 +1,12 @@
+@if (taskForm) {
+  <form [formGroup]="taskForm" (ngSubmit)="handleSubmit()">
+      <input formControlName="title" placeholder="Edit task"/>
+      <button type="submit" >Save</button>
+  </form>
+}
+
+
+<!-- 
+another way of binding the title to the input other than formControlName:
+[formContol]="form.controls.title"
+-->

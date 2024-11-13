@@ -1,0 +1,12 @@
+<div>
+  <h1>Todo List</h1>
+  <input [(ngModel)]="title" placeholder="Add todo" />
+  <button (click)="addTodo()">Add</button>
+  
+  <ol>
+    <li *ngFor="let todo of todos$ | async">
+      <app-todo [todo]="todo" (completedChanged)="onIsCompleted($event)"></app-todo>
+    </li>
+  </ol>
+</div>
+  

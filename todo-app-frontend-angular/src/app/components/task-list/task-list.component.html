@@ -1,0 +1,30 @@
+<h1>Task List</h1>
+
+@if(isFetching() && !errorMessage) {
+  <p>Fetching tasks....</p>
+}
+
+@if (errorMessage) {
+  <div class="error">{{ errorMessage }}</div>
+}
+
+<form [formGroup]="taskForm" (ngSubmit)="addTask()">
+  <input formControlName="title" placeholder="Add task" />
+  <button type="submit">Add</button>
+
+  <ol>
+    <li *ngFor="let task of tasks()">
+      <app-task 
+        [task]="task" 
+        (completedChanged)="onCompletedChanged($event)"
+        (taskDelete)="onDeleteTask($event)"
+      />
+    </li>
+  </ol>
+</form>
+
+<input type="text" (change)="onInputChange($event)" placeholder="Type something..." />
+
+<!-- @for (task of taskss; track taskss._div) {
+  <li>{{taskss}}</li>
+} -->

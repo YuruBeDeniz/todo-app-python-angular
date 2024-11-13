@@ -1,0 +1,4 @@
+<div>
+  <input type="checkbox" [checked]="todo.completed" (change)="toggleComplete()"/>
+  <span [ngClass]="{ 'completed': todo.completed }">{{ todo.title }}</span>
+</div>
