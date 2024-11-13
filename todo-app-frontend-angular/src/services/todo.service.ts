@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import type { Todo } from "../app/models/todo.model";
 
 @Injectable({ providedIn: 'root' })
@@ -14,11 +14,13 @@ export class TodoService {
   }
 
   getTodos(): Observable<Todo[]> { 
-    return this.http.get<Todo[]>(this.apiUrl);
+    return this.http.get<Todo[]>(this.apiUrl).pipe(
+      tap(todos => console.log("Fetched Todos:", todos)) // Add this line
+    );
   }
 
   updateTodo(todo: Todo): Observable<Todo> {
-    const id = todo._id || todo.id; // Handle both cases
+    const id = todo.id
   
     if (!id) {
       console.error("Todo ID is missing in service");

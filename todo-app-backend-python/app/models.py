@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from typing import Optional
+from pydantic import BaseModel, Field
 
 class Task(BaseModel):
     title: str
@@ -9,7 +10,7 @@ class Todo(BaseModel):
     completed: bool = False
 
 class TodoResponse(Todo):
-    id: str
+    id: Optional[str] 
     
 class TaskResponse(Task):
     id: str

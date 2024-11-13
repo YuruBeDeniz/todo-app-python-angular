@@ -9,7 +9,7 @@ export const todoListReducer = createReducer(
   on(todosFetched, (state, { todos }) => [...todos]),
   on(todoAdded, (state, { todo }) => [...state, todo]),
   on(todoUpdated, (state, { todo }) => 
-    state.map((t) => (t._id === todo._id? {...t,...todo } : t)))
+    state.map((t) => (t.id === todo.id? {...t,...todo } : t)))
 );
 
 /* 

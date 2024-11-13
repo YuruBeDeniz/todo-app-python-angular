@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
-import { map, exhaustMap, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { TodoService } from '../../../services/todo.service';
 import { addTodo, getTodos, todoAdded, todosFetched, todoUpdated, updateTodo } from './todo-list.actions';
 
@@ -20,6 +20,7 @@ export class TodoListEffects {
         ofType(getTodos),
         switchMap(() =>
           this.todoService.getTodos().pipe(
+            tap(todos => console.log("Todos from Effect:", todos)),
             map(todos => todosFetched({ todos })),
             catchError(() => EMPTY)
           )
@@ -45,7 +46,7 @@ export class TodoListEffects {
         switchMap(({ todo }) => {
           console.log("Effect received todo:", todo);
   
-          if (!todo._id) {
+          if (!todo.id) {
             console.error("Error: Todo ID is missing in effect");
             return EMPTY;
           }

@@ -14,15 +14,21 @@ export class TodoComponent {
   @Input() todo!: Todo;
   @Output() completedChanged = new EventEmitter<Todo>();
 
+  ngOnInit(): void {
+    // Now, this will have the correct value
+    console.log("Todo in ngOnInit:", this.todo);
+  }
+
+
   toggleComplete(): void {
     const updatedTodo: Todo = { 
-      _id: this.todo._id || this.todo.id, // Handle both cases
+      id: this.todo.id,
       title: this.todo.title,
       completed: !this.todo.completed
     };
     console.log("Updated Todo:", updatedTodo);
 
-    if (updatedTodo._id) {
+    if (updatedTodo.id) {
       this.completedChanged.emit(updatedTodo);
     } else {
       console.error("Error: Todo ID is missing in toggleComplete");

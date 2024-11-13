@@ -28,8 +28,6 @@ async def read_todos():
 
 @router.put("/{id}", response_model=TodoResponse)
 async def update_todo(id: str, todo: Todo):
-    print("ID: ", id)
-    print("TODO : ", todo)
     result = await todos_collection.update_one(
         {"_id": ObjectId(id)}, {"$set": todo.model_dump()}
     )
@@ -37,6 +35,8 @@ async def update_todo(id: str, todo: Todo):
         updated_todo = await todos_collection.find_one({"_id": ObjectId(id)})
         return todo_helper(updated_todo)
     raise HTTPException(status_code=404, detail="Todo not found")
+
+
 
 
 # MongoDB uses ObjectId types for document IDs, which are not JSON serializable by default.

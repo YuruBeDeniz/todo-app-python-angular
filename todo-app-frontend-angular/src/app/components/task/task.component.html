@@ -5,8 +5,8 @@
       <span [ngClass]="{ 'completed': taskForm.get('completed')?.value }">{{ task.title }}</span>
     </div>
     <div class="link-button-group">
-      <a [routerLink]="['task-details', task._id]">Edit</a>
-      <button *ngIf="task._id" (click)="deleteTask(task._id)">Delete</button>
+      <a [routerLink]="['task-details', task.id]">Edit</a>
+      <button *ngIf="task.id" (click)="deleteTask(task.id)">Delete</button>
     </div>
   </div>
 </form>

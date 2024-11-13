@@ -32,7 +32,7 @@ export class TaskService {
 
   updateTask(task: Task): Observable<Task> {
     return new Observable<Task>((observer) => {
-        this.http.put<Task>(`${this.apiUrl}/${task._id}`, task).subscribe({
+        this.http.put<Task>(`${this.apiUrl}/${task.id}`, task).subscribe({
           next: (response) => observer.next(response),
           error: (error) => observer.error(error),
           complete: () => observer.complete()
