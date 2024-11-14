@@ -12,7 +12,6 @@ def todo_helper(todo) -> dict:
         "completed": todo["completed"]
     }
 
-
 @router.post("/", response_model=TodoResponse)
 async def create_todo(todo: Todo):
     new_todo = await todos_collection.insert_one(todo.model_dump())
