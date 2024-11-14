@@ -14,3 +14,7 @@ class TodoResponse(Todo):
     
 class TaskResponse(Task):
     id: str
+    
+
+
+# Pydantic models handle request and response data.    

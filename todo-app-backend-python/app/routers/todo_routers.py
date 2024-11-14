@@ -14,26 +14,35 @@ def todo_helper(todo) -> dict:
 
 @router.post("/", response_model=TodoResponse)
 async def create_todo(todo: Todo):
-    new_todo = await todos_collection.insert_one(todo.model_dump())
-    created_todo = await todos_collection.find_one({"_id": new_todo.inserted_id})
-    return todo_helper(created_todo)
+    try:
+        new_todo = await todos_collection.insert_one(todo.model_dump())
+        created_todo = await todos_collection.find_one({"_id": new_todo.inserted_id})
+        return todo_helper(created_todo)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
 
 @router.get("/", response_model=list[TodoResponse])
 async def read_todos():
-    todos = []
-    async for todo in todos_collection.find():
-        todos.append(todo_helper(todo))
-    return todos
+    try:
+        todos = []
+        async for todo in todos_collection.find():
+            todos.append(todo_helper(todo))
+        return todos
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
 
 @router.put("/{id}", response_model=TodoResponse)
 async def update_todo(id: str, todo: Todo):
-    result = await todos_collection.update_one(
-        {"_id": ObjectId(id)}, {"$set": todo.model_dump()}
-    )
-    if result.modified_count == 1:
-        updated_todo = await todos_collection.find_one({"_id": ObjectId(id)})
-        return todo_helper(updated_todo)
-    raise HTTPException(status_code=404, detail="Todo not found")
+    try:
+        result = await todos_collection.update_one(
+            {"_id": ObjectId(id)}, {"$set": todo.model_dump()}
+        )
+        if result.modified_count == 1:
+            updated_todo = await todos_collection.find_one({"_id": ObjectId(id)})
+            return todo_helper(updated_todo)
+        raise HTTPException(status_code=404, detail="Todo not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
 
 
 
